@@ -1,0 +1,31 @@
+<article id="article">
+	<h2 class="title f"></h2>
+	<div class="body f"></div>
+	<div style="width:600px">
+		<img id="ph" />
+	</div>
+</article>
+<script>
+	var fillPost=function(data){
+		//compila la pagina valorizzando i tag in base al loro id
+		if (data!==Object(data)) return // controllo che il parametro "data" contenga effettivamente un oggetto
+		// ciclo le chiavi dell'oggetto per impostare il testo in base al campo con lo stesso nome
+		for (k in data){
+			if (k && data[k]) $('.'+k).text(data[k])
+		}
+	}
+	var fillImg=function(data){
+		$('#ph').hide().addClass('w3-card-4').attr('src',data.url).slideDown('slow')
+	}
+	var pr=function(){
+		if (a.notLoad){
+			 $('.w3-card-4').remove()
+			 return
+		}
+		//recupero il post con l'id passato come parametro in GET nell'url. L'ID era stato precedentemente memorizzato in una variabile globale
+		$.ajax({url:a.s+'posts/'+a.id}).then(fillPost)
+		//recupero l'immagine con lo stesso id del post
+		$.ajax({url:a.s+'photos/'+a.id}).then(fillImg)
+	}
+	$(pr)
+</script>
