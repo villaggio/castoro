@@ -1,0 +1,31 @@
+<h2>
+	Persone
+</h2>
+<ul id="peoplelist" class="w3-ul w3-border">
+</ul>
+<li class="h w3-clear w3-padding-16" id="peoplerow">
+	<a href="" style="text-decoration:none!important;width:100%">
+		<img src="http://placehold.it/64x64" class="w3-left w3-circle" style="width:64px;vertical-align:center;padding-right:1em">
+		<h3 class="nome"></h3>
+	</a>
+</li>
+
+<script>
+a.p={}
+a.p.pr=function(){
+		$.ajax({url: a.s + '_design/people/_view/titles'}).then(
+			function(data) {
+				a.p.data=JSON.parse(data)
+				a.p.data.rows.map(function(dt){
+					var d=dt.value
+					var id='people-'+dt.id
+					$('#peoplerow .nome').text(d.nome)
+					$('#peoplerow a').attr('href','#/people/'+dt.id)
+					$("#peoplerow").clone().attr('id',id).removeClass('h').appendTo($('#peoplelist'))
+					
+				})
+			}
+		)
+	}
+$(a.p.pr)
+</script>
