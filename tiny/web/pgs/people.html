@@ -1,0 +1,15 @@
+<h2>
+	People
+</h2>
+<script>
+a.p={}
+a.p.pr=function(){
+		$.ajax({url: a.s +a.id}).then(
+			function(data) {
+				a.p.data=JSON.parse(data)
+				$('h2').text(a.p.data.nome)
+			}
+		)
+	}
+$(a.p.pr)
+</script>

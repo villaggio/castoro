@@ -1,8 +1,9 @@
 var a = {}
-a.ver='0.0.2' //versione dell'applicazione
-a.s='https://jsonplaceholder.typicode.com/'  //url da dove recupererò i dati. 
+a.ver='0.0.1' //versione dell'applicazione
+a.s='http://127.0.0.1:5984/tinyfat/'  //url da dove recupererò i dati. 
 a.v='pgs/' // cartella dove vengono salvati i frammenti html da caricare in "#main"
-a.id=0 //id corrente
+a.p={}
+a.id=0
 a.msg = function(m){
 	//visualizza messaggi di errore, avvertimento, eccetera. 
 	//TODO: Ora come ora utilizzamo l'alert, ma in futuro potremmo ad es. far comparire un messaggio scorrevole
@@ -22,6 +23,9 @@ a.load = function (p) {
 		return false
 	}
 }
+a.goTo=function(p){
+	window.location="#/"+p
+}
 a.notFound=function(){
   $('.dyn').load(a.v+'notfound.html')
 }
@@ -34,11 +38,7 @@ a.startApp = function () {
 		a.load('home')
 	}) 
 	Path.map("#/:pag(/:id)").to(function () {
-		//se nell'URL è stato specificato un id, lo memorizzo in una variabile figlia di a.p, che ha il nome della pagina corrente ed il suffisso _id (es: post_id)
 		a.id = this.params.id
-		//permette alle pagine di caricare dati
-		a.notLoad=false
-		//carico la pagina specificata nel parametro "pag"
 		a.load(this.params.pag)
 	})	
 	Path.root("#/home") // rotta di default: se non viene specificata alcuna route nell'url carica la home
@@ -48,13 +48,4 @@ a.startApp = function () {
 	$('#nav').load('_nav.html') //carica la barra di navigazione (statica) in maniera dinamica (così, per strafare)
 }
 
-$(a.startApp) //avvia l'app.
-
-/***
-
-CREDITS
-Per il routing:
-
-https://github.com/mtrpcic/pathjs
-
-***/ 
+$(a.startApp) //avvia l'app. 

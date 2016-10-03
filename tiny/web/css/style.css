@@ -1,3 +1,5 @@
 html,body {font-size:12px;}
 html{overflow-y: scroll;}
-#all{padding:1em;margin:1em auto}
+.h{visibility:hidden}
+#nav{position:fixed;top:0;left:0;height:1em;width:100%}
+#all{padding:1em;margin:1.2em auto}
