@@ -1,0 +1,36 @@
+<h2>
+    Album
+    <small class="id w3-badge w3-green"></small>
+</h2>
+
+<section class="w3-row" id="photos" >
+</section>
+<div style="height:0;width:0" class="h">
+    <article class="h w3-quarter w3-center w3-padding-4" id="photoTemplate">
+        <div class="w3-card w3-center" style="width:152px">
+            <img class="thumbnailUrl">
+        </div>
+    </article>
+</div>
+<script>
+	var listPhotos=function(data){
+		if (!data.map) return //se non è presente il metodo map vuol dire che non è un array, per cui esco dalla funzione 
+		data.map(fillPhotos) //per ogni elemento dell'array richiamo la funzione fillPhotos, alla quale passo come argomento la singola foto (che è rappresentata come un oggetto)
+	}
+	var fillPhotos=function(d){
+        console.log('d:',d)
+		if (Object(d)!==d) return //controllo se d è davvero un oggetto
+		var sel='#photoTemplate' //definisco il selettore del template che conterrà il commento
+		//$(sel+' .title').text(d.title) //compilo i campi di mio interesse		 
+		$(sel+' .thumbnailUrl').attr('src',d.thumbnailUrl).attr('alt',d.title).attr('title',d.title)
+		//$(sel+' .email').text(d.email).attr('href','mailto:'+d.email)
+		$(sel).clone().attr('id','photo-'+d.id).appendTo('#photos').removeClass('h') //clono il tag "commentTemplate", al clone cambio l'attributo id, lo inserisco nella lista con id "comments" e rimuovo la classe "h", che lo nascondeva, in modo che venga visualizzato.   
+
+	}
+	var pr=function(){
+        $('.id').text(a.id)
+		//recupero le foto raccolte in questo album
+		$.ajax({url:a.s+'albums/'+a.id+'/photos'}).then(listPhotos)		
+	}
+	$(pr)
+</script>

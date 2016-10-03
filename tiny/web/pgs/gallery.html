@@ -1,0 +1,28 @@
+<h2>
+    Gallery
+</h2>
+<ul class="w3-ul w3-border" id="albums">
+</ul>
+<script>
+	var drawList=function(data){
+		//utilizzo i dati forniti con l'array data per compilare l'elenco degli album.
+		for (var i=0;i<data.length;i++){
+			var d = data[i]
+			//creo, mediate jquery, un tag "a", imposto l'attributo href con l'id dell'elemento corrente e al suo interno inserisco il titolo 
+			var a=$('<a>').attr('href','#/album/'+d.id).text(d.title)
+			$('<li>').append(a).appendTo('#albums')
+		}
+		
+	}
+	var pr=function(){
+		//scopo: riportare i titoli dei primi 100 post. 
+		//recupero l'elenco dei post
+		//una volta caricati i post, richiamo la funzione drawList, 
+		//passando implicitamnte come argomento i dati ricevuti		
+		$.ajax({url:a.s+'albums'}).then(drawList) 
+	}
+	
+	//il nostro script dovrà entrare in azione solo a caricamento della pagina avvenuta. Per garantirci che sia così, utilizziamo il notro costrutto $(document).ready(), abbreviato
+	$(pr) 
+	
+</script>
